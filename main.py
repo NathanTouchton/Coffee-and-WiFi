@@ -2,16 +2,42 @@ from csv import reader
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, SelectField
+from wtforms.validators import DataRequired, URL
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 bootstrap = Bootstrap5(app)
 
+#  I need the following fields:
+# Cafe name
+# Google Maps URL
+# Opening time
+# Closing time
+# Coffee rating
+# WiFi strength
+# Power socket availability.
 
 class CafeForm(FlaskForm):
-    cafe = StringField('Cafe name', validators=[DataRequired()])
+    cafe = StringField(label="Cafe name", validators=[DataRequired()])
+    maps = StringField(label="Location", validators=[DataRequired(), URL(require_tld=True, message="Please enter a valid URL.")])
+    open_time = StringField(label="Open", validators=[DataRequired()])
+    close_time = StringField(label="Close", validators=[DataRequired()])
+    coffee_rating = SelectField(
+        label="Coffee",
+        choices=["☕️", "☕️☕️", "☕️☕️☕️", "☕️☕️☕️☕️", "☕️☕️☕️☕️☕️"],
+        validators=[DataRequired()]
+    )
+    wifi = SelectField(
+        label="WiFi",
+        choices=["💪", "💪💪", "💪💪💪", "💪💪💪💪", "💪💪💪💪💪"],
+        validators=[DataRequired()]
+    )
+    socket = SelectField(
+        label="Power",
+        choices=["🔌", "🔌🔌", "🔌🔌🔌", "🔌🔌🔌🔌", "🔌🔌🔌🔌🔌"],
+        validators=[DataRequired()]
+    )
     submit = SubmitField('Submit')
 
 # Exercise:

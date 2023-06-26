@@ -10,17 +10,39 @@
             <h1>Add a new cafe into the database</h1>
 
             <!-- This is where your WTForm will go -->
-            <!-- I need the following fields:
-            Cafe name
-            Google Maps URL
-            Opening time
-            Closing time
-            Coffee rating
-            WiFi strength
-            Power socket availability. -->
             <!-- Change below form to "POST" after finishing creating it. -->
             <form method="GET">
-
+                {{form.csrf_token}}
+                {{form.cafe.label}}:
+                <br>
+                {{form.cafe}}
+                <br>
+                {{form.maps.label}}:
+                <br>
+                {{form.maps}}
+                <br>
+                {{form.open_time.label}}:
+                <br>
+                {{form.open_time}}
+                <br>
+                {{form.close_time.label}}:
+                <br>
+                {{form.close_time}}
+                <br>
+                {{form.coffee_rating.label}}:
+                <br>
+                {{form.coffee_rating}}
+                <br>
+                {{form.wifi.label}}:
+                <br>
+                {{form.wifi}}
+                <br>
+                {{form.socket.label}}:
+                <br>
+                {{form.socket}}
+                <br>
+                <br>
+                {{form.submit}}
             </form>
 
 	    <p class="space-above"><a href="#">See all cafes</a></p>

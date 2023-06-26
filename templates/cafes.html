@@ -26,7 +26,12 @@
                         {% for row in cafes[1:] %}
                         <tr>
                             {% for value in row %}
-                                <td>{{value}}</td>
+                                {% if loop.index != 2 %}
+                                    <td>{{ value }}</td>
+                                {% endif %}
+                                {% if loop.index == 2 %}
+                                    <td><a href={{value}} target="_blank" >Maps Link</a></td>
+                                {% endif %}
                             {% endfor %}
                         </tr>
                         {% endfor %}

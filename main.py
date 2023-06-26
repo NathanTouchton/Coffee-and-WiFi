@@ -20,6 +20,7 @@ bootstrap = Bootstrap5(app)
 
 class CafeForm(FlaskForm):
     cafe = StringField(label="Cafe name", validators=[DataRequired()])
+    # TODO when I get back: Check why URL verification isn't working. 
     maps = StringField(label="Location", validators=[DataRequired(), URL(require_tld=True, message="Please enter a valid URL.")])
     open_time = StringField(label="Open", validators=[DataRequired()])
     close_time = StringField(label="Close", validators=[DataRequired()])

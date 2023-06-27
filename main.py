@@ -1,4 +1,4 @@
-from csv import reader
+from csv import reader, writer
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
@@ -59,13 +59,19 @@ def home():
 @app.route('/add', methods=["GET", "POST"])
 def add_cafe():
     form = CafeForm()
-    # if request.method == "POST":
-    if form.validate_on_submit():
-        print("True")
     # TODO: This is my current task.
     # Exercise:
     # Make the form write a new row into cafe-data.csv
-    # with   if form.validate_on_submit()
+    if form.validate_on_submit():
+        with open(file="cafe-data.csv", encoding="UTF-8", mode="a") as file:
+            data = []
+            # print(form.data)
+            for item in form.data:
+                # print(item)
+                if item != "submit" and item != "csrf_token":
+                    data.append(item)
+            print(data)
+            writer(file).writerow(data)
     return render_template('add.html', form=form)
 
 

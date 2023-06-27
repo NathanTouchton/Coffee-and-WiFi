@@ -11,7 +11,7 @@
 
             <!-- This is where your WTForm will go -->
             <!-- Change below form to "POST" after finishing creating it. -->
-            <form action="{{url_for('home')}}" method="POST">
+            <form action="{{url_for('add_cafe')}}" method="POST">
                 {{form.csrf_token}}
                 {{form.cafe.label}}:
                 <br>

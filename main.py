@@ -2,8 +2,8 @@ from csv import reader
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
-from wtforms.validators import DataRequired, URL
+from wtforms import StringField, SubmitField, SelectField, URLField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -20,8 +20,7 @@ bootstrap = Bootstrap5(app)
 
 class CafeForm(FlaskForm):
     cafe = StringField(label="Cafe name", validators=[DataRequired()])
-    # TODO when I get back: Check why URL verification isn't working. 
-    maps = StringField(label="Location", validators=[DataRequired(), URL(require_tld=True, message="Please enter a valid URL.")])
+    maps = URLField(label="Location", validators=[DataRequired()])
     open_time = StringField(label="Open", validators=[DataRequired()])
     close_time = StringField(label="Close", validators=[DataRequired()])
     coffee_rating = SelectField(
@@ -57,11 +56,13 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/add')
+@app.route('/add', methods=["GET", "POST"])
 def add_cafe():
     form = CafeForm()
+    # if request.method == "POST":
     if form.validate_on_submit():
         print("True")
+    # TODO: This is my current task.
     # Exercise:
     # Make the form write a new row into cafe-data.csv
     # with   if form.validate_on_submit()
